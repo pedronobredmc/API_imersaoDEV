@@ -1,6 +1,6 @@
 import multer from "multer"; // Importa o módulo multer para lidar com uploads de arquivos
 import express from "express"; // Importa o módulo express para criar o servidor e gerenciar rotas
-import { listarBebidas, listarPizzas, cadastrarBebida, cadastrarPizza, uploadImagemBebida, uploadImagemPizza, AtualizaNovaBebida, atualizaNovaPizza} from "../controllers/controller.js"; // Importa as funções do controlador
+import { listarBebidas, listarPizzas, cadastrarBebida, cadastrarPizza, uploadImagemBebida, uploadImagemPizza, atualizaNovaBebida, atualizaNovaPizza} from "../controllers/controller.js"; // Importa as funções do controlador
 
 // Configuração do armazenamento de arquivos para uploads
 const storage = multer.diskStorage({
@@ -53,7 +53,7 @@ const routes = (app) => {
     // o middleware do multer (upload.single) será executado para processar o arquivo enviado, 
     // seguido pela função uploadImagem para lidar com a lógica do upload
 
-    app.put('/uploadbebida/:id', AtualizaNovaBebida);
+    app.put('/uploadbebida/:id', atualizaNovaBebida);
 
     app.put('/uploadpizza/:id', atualizaNovaPizza);
 };
