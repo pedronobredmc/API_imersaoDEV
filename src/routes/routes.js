@@ -1,6 +1,12 @@
 import multer from "multer"; // Importa o módulo multer para lidar com uploads de arquivos
 import express from "express"; // Importa o módulo express para criar o servidor e gerenciar rotas
 import { listarBebidas, listarPizzas, cadastrarBebida, cadastrarPizza, uploadImagemBebida, uploadImagemPizza, atualizaNovaBebida, atualizaNovaPizza} from "../controllers/controller.js"; // Importa as funções do controlador
+import cors from "cors"; // Importa o módulo cors para habilitar o CORS
+
+const corsOptions = {
+    origin: "http://localhost:8000",// Define as opções de CORS para permitir apenas requisições do localhost do fronted na porta 8000
+    optionSuccessStatus: 200 // Define o status de sucesso para requisições CORS
+}; 
 
 // Configuração do armazenamento de arquivos para uploads
 const storage = multer.diskStorage({
@@ -53,9 +59,14 @@ const routes = (app) => {
     // o middleware do multer (upload.single) será executado para processar o arquivo enviado, 
     // seguido pela função uploadImagem para lidar com a lógica do upload
 
+    // Rota para atualizar as informações de uma bebida, incluindo nome, preço, descrição e imagem
+    // O ID da bebida é passado como parâmetro na URL e a função 'atualizaNovaBebida' é chamada para processar a requisição
     app.put('/uploadbebida/:id', atualizaNovaBebida);
 
+    // Rota para atualizar as informações de uma pizza, incluindo sabor, preço, descrição e imagem
+    // O ID da pizza é passado como parâmetro na URL e a função 'atualizaNovaPizza' é chamada para processar a requisição
     app.put('/uploadpizza/:id', atualizaNovaPizza);
+
 };
 
 // Exporta a função de rotas para ser usada em outros arquivos
