@@ -4,6 +4,9 @@ import express from "express";
 
 // Cria uma instância do Express
 const app = express();
+
+app.use(express.static('uploads'));
+
 routes(app);
 
 

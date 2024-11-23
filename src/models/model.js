@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import connectToDatabase from "../config/dbConfig.js"; // Importa a função para conectar ao banco de dados
 
 // Conecta ao banco de dados utilizando a string de conexão definida nas variáveis de ambiente
@@ -45,4 +46,18 @@ export async function criarBebida(novaBebida) {
 
     // Insere um novo documento (bebida) na coleção e retorna o resultado da operação
     return colecao.insertOne(novaBebida);
+};
+
+export async function atualizarBebida(id, novaBebida) {
+    const db = conexao.db("Piza's_Pizzaria");
+    const colecao = db.collection("Bebidas");
+    const objetoId = ObjectId.createFromHexString(id);
+    return colecao.updateOne({_id: new ObjectId(objetoId)}, {$set: novaBebida});
+};
+
+export async function atualizarPizza(id, novaPizza) {
+    const db = conexao.db("Piza's_Pizzaria");
+    const colecao = db.collection("Pizzas");
+    const objetoId = ObjectId.createFromHexString(id);
+    return colecao.updateOne({_id: new ObjectId(objetoId)}, {$set: novaPizza});
 };
