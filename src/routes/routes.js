@@ -30,6 +30,8 @@ const upload = multer({
 const routes = (app) => {
     // Habilita o middleware para lidar com requisições JSON no express
     app.use(express.json());
+    // Habilita o CORS com as opções definidas acima 6-9 para permitir requisições do frontend
+    app.use(cors(corsOptions));
 
     // Rota para buscar todas as pizzas
     app.get('/pizzas', listarPizzas); 
